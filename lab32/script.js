@@ -41,34 +41,63 @@ function loadQuestions() {
     const questionContainer = document.getElementById('question-container');
     questionContainer.innerHTML = ``
     document.getElementById('result').innerHTML = ``
+
     questions.forEach((q, index) => {
         const div = document.createElement('div')
-        div.innerHTML = `<h3>${q.question}</h3>`;
+        div.id = `div-${index}`
+        div.innerHTML = `<h3 id='question-header-${index}'>${q.question}</h3>`;
         q.answers.forEach((answer, i) => {
-            div.innerHTML += `<label>
-                <input type="radio" name="question${index}" value="${i}"> ${answer}
+            div.innerHTML += 
+            `<label>
+                <input id='answer-${index}-${i}' type="radio" name="question${index}" value="${i}" onchange='checkAllAnswered()'> ${answer}
             </label><br>`;
         });
         questionContainer.appendChild(div);
     });
 }
 
+function checkAllAnswered() {
+    const allAnswered = questions.every((_, index) => {
+        return document.querySelector(`input[name="question${index}"]:checked`);
+    });
+
+    document.getElementById('submit-button').style.display = allAnswered ? 'block' : 'none';
+}
+
+checkAllAnswered()
+
 // Avalia as respostas fornecidas pelo usuário
 function submitAnswers() {
     let score = 0;
+
     questions.forEach((q, index) => {
+        const ans_div = document.getElementById(`div-${index}`)
         const selectedAnswer = document.querySelector(`input[name="question${index}"]:checked`);
+        const rightAnswer = document.getElementById(`answer-${index}-${questions[index].correctAnswer}`)
+        const label = selectedAnswer.parentElement;
+        console.log(rightAnswer)
+
         if (selectedAnswer && parseInt(selectedAnswer.value) === q.correctAnswer) {
-            score++;
-            selectedAnswer.style.color = 'red'
+            score++
+            label.style.cssText = 'color: green;'
+            const pCerto = document.createElement('p')
+            pCerto.style.cssText = 'color: rgb(0, 182, 55); font-weight: 800; width: auto;'
+            pCerto.innerHTML = `<p>A resposta está correta!</p>`
+            ans_div.appendChild(pCerto)
         }
         else {
-            
+            const pErrado = document.createElement('p')
+            pErrado.style.cssText = 'color: yellow; font-weight: 800; width: auto;'
+            pErrado.innerHTML = `<p>Resposta correta: ${q.answers[q.correctAnswer]}</p>`
+            ans_div.appendChild(pErrado)
+            label.style.cssText = 'color: red;'
         }
         
-        
     });
-    document.getElementById('result').innerHTML = `You scored ${score} out of ${questions.length} <br><button onclick='loadQuestions()'>Reset</button>`;
+    const result = document.getElementById('result')
+    result.innerHTML = `You scored ${score} out of ${questions.length} <p></p><button onclick='loadQuestions()'>Reset</button>`;
+    result.style.cssText = "background-color: white; color: black; margin: auto; margin-top: 20px; margin-bottom: 20px; width: 400px; border-radius: 20px; text-align: center; font-weight: 800; padding: 10px;"
+    document.getElementById('submit-button').style.display = 'none'
 }
 
 window.onload = loadQuestions;
