@@ -1,6 +1,6 @@
 # Aulas-WEB-DEV
 
-- Files that were created in WEB Development Classes.
+- Files from WEB Development Classes.
 - Lab01 (Example of simple Web Page)
 - Lab02 (Web Page with CSS)
 - Lab04 (Rebuilding HTML of the web page from Images and CSS)
