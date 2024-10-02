@@ -1,0 +1,41 @@
+body {
+    background-image: url("image.jpg");
+    background-size: cover;
+}
+
+.container{
+    text-align: left;
+    background-color: white;
+    color: black;
+    margin-top: 200px;
+    margin-right: auto;
+    margin-left: auto;
+    width: 400px;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 10px 10px 5px 0px black;
+    padding: 30px;
+}
+
+h1 {
+    font-family: sans-serif;
+    font-weight: 600;
+    font-size: 50px;
+    text-align: center;
+}
+
+input {
+    border: none;
+    width: 100px;
+    height: 20px;
+}
+form {
+    padding: 10px;
+}
+textarea {
+    border: none;
+}
+
+::placeholder {
+    font-size: 20px;
+}
