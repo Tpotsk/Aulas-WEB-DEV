@@ -9,18 +9,19 @@
 <body>
     <div id="container" class="container">
         <h1>CONTACT US</h1>
-        <form>
-            <input type="text" placeholder="Name" class='entrada' required>
+        <form action="https://formspree.io/f/meoqjeqp" method="post">
+            <input type="text" placeholder="Name" class='entrada' name='name' required>
             <br>
             <hr>
-            <input type="email" placeholder="Email" class="entrada" required>
+            <input type="email" placeholder="Email" class="entrada" name='email' required>
             <br>
             <hr>
-            <textarea placeholder="Enter your message" class="entrada"></textarea>
+            <textarea placeholder="Enter your message" class="entrada" name="message"></textarea>
             <br>
             <hr>
-            <button type="submit">Submit</button>
+            <button type="submit">Submit</button>            
         </form>
     </div>
+    </script>
 </body>
 </html>
